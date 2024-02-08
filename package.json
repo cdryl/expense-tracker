@@ -1,6 +1,7 @@
 {
   "name": "expense-tracker",
   "version": "0.1.0",
+  "homepage": "https://cdryl.github.io/expense-tracker",
   "private": true,
   "dependencies": {
     "@phosphor-icons/react": "^2.0.15",
@@ -26,6 +27,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -54,6 +57,7 @@
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
+    "gh-pages": "^6.1.1",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.1"
   }
