@@ -15,7 +15,7 @@ const Form = <T extends FieldValues>({
     <FormProvider {...methods}>
       {onSubmit && (
         <form onSubmit={methods.handleSubmit(onSubmit)} className={className}>
-          {children}
+          {typeof children === "function" ? children(methods) : children}
         </form>
       )}
     </FormProvider>

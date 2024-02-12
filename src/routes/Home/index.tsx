@@ -1,39 +1,41 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  FormEventHandler,
-  useContext,
-  useState,
-} from "react";
-import { AuthContext } from "../../contexts/AuthContext";
-import { useGetExpensesFromDb, useRemoveExpenseFromDb, useSetExpensesToDb } from "./hooks";
 import { useForm } from "react-hook-form";
-import { ExpenseProps } from "./types";
+import { ExpenseProps, HomeProps } from "./types";
+import { useGetItemsFromDb, useSetItemToDb } from "../../firebase/hooks";
+import { FC } from "react";
+import { SignOutUser } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
-const Home = () => {
-  const { currentUser, signOut } = useContext(AuthContext);
-  const { expenses, isLoading } = useGetExpensesFromDb();
-  const mutation = useSetExpensesToDb();
+const Home: FC<HomeProps> = ({ user }) => {
+  const { items, isLoading } = useGetItemsFromDb<ExpenseProps>("expenses");
+  const addExpense = useSetItemToDb("expenses");
+  const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm<ExpenseProps>();
 
-  console.log(expenses);
-
   const onSubmit = (data: ExpenseProps) => {
-    mutation.mutate({
+    addExpense.mutate({
       amount: data.amount,
       category: data.category,
-      user: currentUser?.email || "",
+      user: user.email || "",
     });
 
     reset();
   };
 
+  const signOut = () => {
+    SignOutUser();
+    navigate("/");
+  };
+
   return (
     <div>
-      <h3>Welcome! {currentUser?.email}</h3>
       <div>
-        <form onSubmit={handleSubmit(onSubmit )}>
-          <input type="number" id="amount" placeholder="Amount" {...register("amount")} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type="number"
+            id="amount"
+            placeholder="Amount"
+            {...register("amount")}
+          />
           <input
             type="text"
             id="category"
@@ -44,7 +46,7 @@ const Home = () => {
         </form>
       </div>
       <button>remove</button>
-      {/* {expenses?.map((expense) => <div key={expense.key}>{expense.amount}</div>)} */}
+      {items?.map((item) => <div key={item.id}>{item.amount}</div>)}
       <button onClick={signOut}>Sign Out</button>
     </div>
   );
