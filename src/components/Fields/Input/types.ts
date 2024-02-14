@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from "react";
 
 export interface InputBaseProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "prefix"> {
+  extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   label?: React.ReactNode;
   isError?: boolean;

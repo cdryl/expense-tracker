@@ -10,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @apply bg-purple;
 }
 
 code {
@@ -18,5 +19,5 @@ code {
 }
 
 ::selection {
-  @apply bg-green-700 text-white;
+  @apply bg-pink text-white;
 }

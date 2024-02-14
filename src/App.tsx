@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { AuthenticatedRoute, UnauthenticatedRoute } from "./RequireAuth";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
@@ -14,8 +14,6 @@ function App() {
     const unsubscribe = onAuthStateChanged(getAuth(), setUser);
     return unsubscribe;
   }, []);
-
-  console.log(user, 'user')
 
   return (
     <QueryClientProvider client={queryClient}>

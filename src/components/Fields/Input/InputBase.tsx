@@ -9,13 +9,13 @@ const InputBase: FC<InputBaseProps> = ({
   ...rest
 }) => (
   <div className="w-full flex flex-col">
-    <label className="text-xs text-gray-600 mb-1">{label}</label>
+    <label className="text-xs text-white mb-1">{label}</label>
     <input
       className={clsx(
         className,
-        "border border-gray-400 p-3 text-sm rounded-lg focus:outline-green-700",
+        "border border-pink  bg-purple-light text-white p-3 text-sm rounded-lg focus:outline-pink [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
         {
-          "border-red-400": isError,
+          "border-pink": isError,
         }
       )}
       {...rest}

@@ -18,5 +18,5 @@ export const UnauthenticatedRoute = ({
 }) => {
   if (user === undefined) return <div>Loading...</div>;
 
-  return user ? <Navigate to="/" /> : <Outlet />;
+  return user ? <Navigate to="/home" /> : <Outlet />;
 };
